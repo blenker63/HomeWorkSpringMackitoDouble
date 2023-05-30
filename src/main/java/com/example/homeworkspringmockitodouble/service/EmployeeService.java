@@ -9,26 +9,22 @@ import java.util.Map;
 public class EmployeeService {
     private static int counter = 0;
     private int number = 10;
+     public final Map<String, Employee> employeeData = new HashMap<>();
+//    Map<String, Employee> employeeData = new HashMap<>(Map.of(
+//            "ИвановИванИванович",
+//            new Employee("Иванов", "Иван", "Иванович", 1, 11_000),
+//            "ПетровПетрПетрович",
+//            new Employee("Петров", "Петр", "Петрович", 2, 15000),
+//            "СидоровСидорСидорович",
+//            new Employee("Сидоров", "Сидор", "Сидорович", 3, 13000),
+//            "ВасильевВасилийИванович",
+//            new Employee("Васильев", "Василий", "Иванович", 4, 16000),
+//            "СоловьевСтепанВасильевич",
+//            new Employee("Соловьев", "Степан", "Васильевич", 2, 22000),
+//            "СтепановГригорийМихайлович",
+//            new Employee("Степанов", "Григорий", "Михайлович", 5, 17000)
+//    ));
 
-    Map<String, Employee> employeeData = new HashMap<>(Map.of(
-            "ИвановИванИванович",
-            new Employee("Иванов", "Иван", "Иванович", 1, 11_000),
-            "ПетровПетрПетрович",
-            new Employee("Петров", "Петр", "Петрович", 2, 15000),
-            "СидоровСидорСидорович",
-            new Employee("Сидоров", "Сидор", "Сидорович", 3, 13000),
-            "ВасильевВасилийИванович",
-            new Employee("Васильев", "Василий", "Иванович", 4, 16000),
-            "СоловьевСтепанВасильевич",
-            new Employee("Соловьев", "Степан", "Васильевич", 2, 22000),
-            "СтепановГригорийМихайлович",
-            new Employee("Степанов", "Григорий", "Михайлович", 5, 17000)
-    ));
-
-    public String startWork() {
-        return "<b>Добро пожаловать</b>";
-
-    }
 
     public Employee addEmployee(String surname, String name, String patronymic, int department, int salary) {
 
@@ -41,7 +37,8 @@ public class EmployeeService {
             throw new EmployeeAlreadyAddedException(kay + " - такой сотрудник уже есть");
 
         }
-        employeeData.put(employee.getFullName(), employee);
+//        employeeData.put(employee.getFullName(), employee);
+        employeeData.put(kay, employee);
         counter++;
         System.out.println("Добавлен сотрудник - " + employee);
         return employee;
@@ -66,5 +63,9 @@ public class EmployeeService {
         }
         System.out.println("Сотрудник найден -  " + resultGet);
         return resultGet;
+    }
+
+    public Map<String, Employee> getEmployeeData() {
+        return employeeData;
     }
 }

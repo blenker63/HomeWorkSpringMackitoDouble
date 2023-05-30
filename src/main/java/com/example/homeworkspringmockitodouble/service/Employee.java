@@ -7,7 +7,7 @@ public class Employee {
     private String fullName;
     private int department;
     private int salary;
-    private static int counter = 0;
+    private int counter = 0;
 
 
     public Employee(String surname, String name, String patronymic, int department, int salary) {
@@ -39,7 +39,7 @@ public class Employee {
         return this.department;
     }
 
-    public int getSalary() {
+    public  int getSalary() {
         return this.salary;
     }
 

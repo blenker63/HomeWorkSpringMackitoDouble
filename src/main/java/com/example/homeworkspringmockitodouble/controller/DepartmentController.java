@@ -1,10 +1,7 @@
 package com.example.homeworkspringmockitodouble.controller;
 
 import com.example.homeworkspringmockitodouble.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
@@ -31,13 +28,18 @@ public class DepartmentController {
         return "Сотрудник департамента - " + department + " с минимальной зарплатой - " + String.valueOf(departmentService.employeeMinSalary(department));
     }
 
-    @GetMapping(path = "/all")
-    public String employeePrint(@RequestParam(required = false, value = "departmentID") Integer department) {
-        if (department == null) {
-            return departmentService.employeePrintAll().toString();
-        } else {
-            return departmentService.employeePrintDepartment(department).toString();
-        }
+//    @GetMapping(path = "/all")
+//    public String employeePrint(@RequestParam(required = false, value = "departmentID") Integer department) {
+//        if (department == null) {
+//            return departmentService.employeePrintAll().toString();
+//        } else {
+//            return departmentService.employeePrintDepartment(department).toString();
+//        }
+//    }
+    @GetMapping("{id}//sum")
+    public String employeeSumSalary(@PathVariable (value = "departmentID") Integer department)
+    {
+        return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
     }
 }
 

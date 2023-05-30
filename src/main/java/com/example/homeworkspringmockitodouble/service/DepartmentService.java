@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public DepartmentService(EmployeeService employeeService) {
         this.employeeService= employeeService;
@@ -17,10 +17,16 @@ public class DepartmentService {
 
     //    private final Map<String, Employee> employeeDataDep = new HashMap<>();
 //
-    public Optional<Employee> employeeMaxSalary(int department) {
-        return employeeService.employeeData.values().stream()
+//    public Optional <Employee> employeeMaxSalary(int department) {
+//    public Employee employeeMaxSalary(int department) {
+    public int  employeeMaxSalary(int department) {
+        return employeeService.getEmployeeData()
+                .stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-                .max(Comparator.comparing(Employee::getSalary));
+//                .mapToInt(Employee :: getSalary)
+//                .max();
+                .max(Comparator.comparingInt(Employee :: getSalary))
+                .orElse(null);
     }
 
     public Optional<Employee> employeeMinSalary(int department) {
@@ -40,4 +46,16 @@ public class DepartmentService {
                 .filter(employeeData -> employeeData.getDepartment() == department)
                 .collect(Collectors.toList());
     }
+    public int employeeSumSalary(int department) {
+        return employeeService.employeeData.values().stream()
+                .filter(employeeData -> employeeData.getDepartment() == department)
+                .mapToInt( Employee :: getSalary)
+                .sum();
+    }
+//    public Map<Integer, List<Employee>> allEmployeeDepartment() {
+//         return employeeService.employeeMap().values().stream()
+//                 .collect(Collectors.groupingBy(Employee :: getDepartment));
+////                 .collect(Collectors.groupingBy(Employee :: getDepartment,
+////                         Collectors.mapping(Employee :: getSurname, Collectors.toSet())));
+//        }
 }
