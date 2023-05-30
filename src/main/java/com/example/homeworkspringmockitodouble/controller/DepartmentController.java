@@ -1,13 +1,12 @@
 package com.example.homeworkspringmockitodouble.controller;
 
 import com.example.homeworkspringmockitodouble.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.homeworkspringmockitodouble.service.Employee;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping(path = "/departments")
@@ -39,5 +38,14 @@ public class DepartmentController {
             return departmentService.employeePrintDepartment(department).toString();
         }
     }
+    @GetMapping("{id}//sum")
+    public String employeeSumSalary(@PathVariable (value = "departmentID") Integer department)
+    {
+        return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
+    }
+        @GetMapping( path = "/employee/1")
+        public  Map<Integer, List<Employee>> allEmployeeDepartment() {
+        return departmentService.allEmployeeDepartment();
+   }
 }
 

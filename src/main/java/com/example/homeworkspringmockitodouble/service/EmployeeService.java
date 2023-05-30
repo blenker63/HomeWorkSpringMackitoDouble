@@ -9,8 +9,8 @@ import java.util.Map;
 public class EmployeeService {
     private static int counter = 0;
     private int number = 10;
-
-    Map<String, Employee> employeeData = new HashMap<>(Map.of(
+     public final Map<String, Employee> employeeData = new HashMap<>();
+    Map<String, Employee> employeeDataPreliminary = new HashMap<>(Map.of(
             "ИвановИванИванович",
             new Employee("Иванов", "Иван", "Иванович", 1, 11_000),
             "ПетровПетрПетрович",
@@ -25,10 +25,6 @@ public class EmployeeService {
             new Employee("Степанов", "Григорий", "Михайлович", 5, 17000)
     ));
 
-    public String startWork() {
-        return "<b>Добро пожаловать</b>";
-
-    }
 
     public Employee addEmployee(String surname, String name, String patronymic, int department, int salary) {
 
@@ -41,7 +37,8 @@ public class EmployeeService {
             throw new EmployeeAlreadyAddedException(kay + " - такой сотрудник уже есть");
 
         }
-        employeeData.put(employee.getFullName(), employee);
+//        employeeData.put(employee.getFullName(), employee);
+        employeeData.put(kay, employee);
         counter++;
         System.out.println("Добавлен сотрудник - " + employee);
         return employee;
@@ -50,7 +47,7 @@ public class EmployeeService {
 
     public Employee removeEmployee(String surname, String name, String patronymic) {
         var kay = surname + name + patronymic;
-        var resultRemove = employeeData.remove(kay);
+        var resultRemove = employeeDataPreliminary.remove(kay);
         if (resultRemove == null) {
             throw new EmployeeNotFoundException(kay + " - Сотрудник не найден");
         }
@@ -60,11 +57,15 @@ public class EmployeeService {
 
     public Employee getEmployee(String surname, String name, String patronymic) {
         var kay = surname + name + patronymic;
-        var resultGet = employeeData.get(kay);
+        var resultGet = employeeDataPreliminary.get(kay);
         if (resultGet == null) {
             throw new EmployeeNotFoundException(kay + " - Сотрудник не найден");
         }
         System.out.println("Сотрудник найден -  " + resultGet);
         return resultGet;
+    }
+
+    public Map<String, Employee> getEmployeeData() {
+        return new HashMap<>(employeeData);
     }
 }
