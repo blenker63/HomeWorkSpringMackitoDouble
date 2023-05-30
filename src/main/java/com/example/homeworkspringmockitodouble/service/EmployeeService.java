@@ -9,7 +9,7 @@ import java.util.Map;
 public class EmployeeService {
     private static int counter = 0;
     private int number = 10;
-     public final Map<String, Employee> employeeData = new HashMap<>();
+    public final Map<String, Employee> employeeData = new HashMap<>();
     Map<String, Employee> employeeDataPreliminary = new HashMap<>(Map.of(
             "ИвановИванИванович",
             new Employee("Иванов", "Иван", "Иванович", 1, 11_000),

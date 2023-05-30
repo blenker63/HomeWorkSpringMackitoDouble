@@ -90,13 +90,12 @@ public class DepartmentTest {
                 new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000));
         when(employeeServiceMoc.getEmployeeData()).thenReturn(employeeTest);
         var expected = List.of(
-//               new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000),
-//               new Employee("Иванов11", "Иван", "Иванович", 1, 11_000));
                 new Employee("Петров11", "Петр", "Петрович", 2, 15000));
         var actual = departmentService.employeePrintDepartment(2);
         assertEquals(1, actual.size());
         assertIterableEquals(expected, actual);
     }
+
     @Test
     void employeePrintAllTest() {
         Map<String, Employee> employeeTest = Map.of(
@@ -108,13 +107,14 @@ public class DepartmentTest {
                 new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000));
         when(employeeServiceMoc.getEmployeeData()).thenReturn(employeeTest);
         var expected2 = List.of(
-               new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000),
-               new Employee("Иванов11", "Иван", "Иванович", 1, 11_000),
+                new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000),
+                new Employee("Иванов11", "Иван", "Иванович", 1, 11_000),
                 new Employee("Петров11", "Петр", "Петрович", 2, 15000));
         var actual2 = departmentService.employeePrintAll();
         assertEquals(3, actual2.size());
         assertIterableEquals(expected2, actual2);
     }
+
     @Test
     void allEmployeeDepartmentTest() {
         Map<String, Employee> employeeTest = Map.of(
@@ -126,7 +126,7 @@ public class DepartmentTest {
                 new Employee("Сидоров11", "Сидор", "Сидорович", 1, 13000));
         when(employeeServiceMoc.getEmployeeData()).thenReturn(employeeTest);
         var expected3 = employeeTest.values().stream()
-                .collect(Collectors.groupingBy(Employee :: getDepartment));
+                .collect(Collectors.groupingBy(Employee::getDepartment));
         var actual3 = departmentService.allEmployeeDepartment();
         assertEquals(2, expected3.size());
         assertEquals(2, actual3.size());

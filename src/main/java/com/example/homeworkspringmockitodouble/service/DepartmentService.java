@@ -10,35 +10,33 @@ public class DepartmentService {
     private final EmployeeService employeeService;
 
     public DepartmentService(EmployeeService employeeService) {
-        this.employeeService= employeeService;
+        this.employeeService = employeeService;
     }
 
-    //    private final Map<String, Employee> employeeDataDep = new HashMap<>();
-//
-//    public Optional <Employee> employeeMaxSalary(int department) {
-//    public Employee employeeMaxSalary(int department) {
-    public Employee  employeeMaxSalary(int department) {
+    public Employee employeeMaxSalary(int department) {
         return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-                .max(Comparator.comparingInt(Employee :: getSalary))
+                .max(Comparator.comparingInt(Employee::getSalary))
                 .orElse(null);
     }
 
     public Employee employeeMinSalary(int department) {
         return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-                .min(Comparator.comparingInt(Employee :: getSalary))
+                .min(Comparator.comparingInt(Employee::getSalary))
                 .orElse(null);
     }
+
     public int employeeSumSalary(int department) {
         return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-                .mapToInt( Employee :: getSalary)
+                .mapToInt(Employee::getSalary)
                 .sum();
     }
+
     public Collection<Employee> employeePrintAll() {
         return employeeService.getEmployeeData().values().stream()
-                .sorted(Comparator.comparingInt(Employee :: getDepartment))
+                .sorted(Comparator.comparingInt(Employee::getDepartment))
                 .collect(Collectors.toList());
     }
 
@@ -49,9 +47,7 @@ public class DepartmentService {
     }
 
     public Map<Integer, List<Employee>> allEmployeeDepartment() {
-         return employeeService.getEmployeeData().values().stream()
-                 .collect(Collectors.groupingBy(Employee :: getDepartment));
-//                 .collect(Collectors.groupingBy(Employee :: getDepartment,
-//                         Collectors.mapping(Employee :: getSurname, Collectors.toSet())));
-        }
+        return employeeService.getEmployeeData().values().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+    }
 }

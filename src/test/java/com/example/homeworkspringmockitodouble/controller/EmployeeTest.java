@@ -20,9 +20,6 @@ public class EmployeeTest {
         Assertions.assertDoesNotThrow(() -> {
             employeeService.addEmployee("Петров1", "Петр", "Петрович", 2, 15000);
         });
-//        int number = employeeService.number;
-//        number = 2;
-//        Assertions.assertEquals(number + 1, employeeService.number + 1);
         Assertions.assertThrows(EmployeeStoragelsFullException.class, () -> {
             employeeService.addEmployee("Иванов1", "Иван", "Иванович", 1, 11_000);
             employeeService.addEmployee("Иванов2", "Иван", "Иванович", 1, 11_000);
@@ -42,12 +39,12 @@ public class EmployeeTest {
     public void removeEmployeeTest() {
         Assertions.assertThrows(EmployeeNotFoundException.class, () -> {
             employeeService.removeEmployee("Иванов99", "Иван", "Иванович");
-//            employeeService.removeEmployee("Иванов", "Иван", "Иванович");
         });
         Assertions.assertDoesNotThrow(() -> {
             employeeService.removeEmployee("Петров", "Петр", "Петрович");
         });
     }
+
     @Test
     public void getEmployeeTest() {
         Assertions.assertThrows(EmployeeNotFoundException.class, () -> {

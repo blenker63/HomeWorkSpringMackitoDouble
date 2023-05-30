@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(path = "/departments")
 public class DepartmentController {
@@ -16,6 +17,7 @@ public class DepartmentController {
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
+
     @GetMapping(path = "/max-salary")
 
     public String employeeMaxSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
@@ -38,14 +40,15 @@ public class DepartmentController {
             return departmentService.employeePrintDepartment(department).toString();
         }
     }
+
     @GetMapping("{id}//sum")
-    public String employeeSumSalary(@PathVariable (value = "departmentID") Integer department)
-    {
+    public String employeeSumSalary(@PathVariable(value = "departmentID") Integer department) {
         return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
     }
-        @GetMapping( path = "/employee/1")
-        public  Map<Integer, List<Employee>> allEmployeeDepartment() {
+
+    @GetMapping(path = "/employee/1")
+    public Map<Integer, List<Employee>> allEmployeeDepartment() {
         return departmentService.allEmployeeDepartment();
-   }
+    }
 }
 

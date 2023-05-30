@@ -41,7 +41,7 @@ public class Employee {
         return this.department;
     }
 
-    public  int getSalary() {
+    public int getSalary() {
         return this.salary;
     }
 
