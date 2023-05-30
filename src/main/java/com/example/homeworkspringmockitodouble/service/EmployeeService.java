@@ -66,6 +66,6 @@ public class EmployeeService {
     }
 
     public Map<String, Employee> getEmployeeData() {
-        return employeeData;
+        return new HashMap<>(employeeData);
     }
 }

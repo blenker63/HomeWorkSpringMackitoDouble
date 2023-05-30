@@ -2,9 +2,7 @@ package com.example.homeworkspringmockitodouble.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,39 +17,37 @@ public class DepartmentService {
 //
 //    public Optional <Employee> employeeMaxSalary(int department) {
 //    public Employee employeeMaxSalary(int department) {
-    public int  employeeMaxSalary(int department) {
-        return employeeService.getEmployeeData()
-                .stream()
+    public Employee  employeeMaxSalary(int department) {
+        return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-//                .mapToInt(Employee :: getSalary)
-//                .max();
                 .max(Comparator.comparingInt(Employee :: getSalary))
                 .orElse(null);
     }
 
-    public Optional<Employee> employeeMinSalary(int department) {
-        return employeeService.employeeData.values().stream()
+    public Employee employeeMinSalary(int department) {
+        return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
-                .min(Comparator.comparing(Employee::getSalary));
-    }
-
-    public List<Employee> employeePrintAll() {
-        return employeeService.employeeData.values().stream()
-                .sorted(Comparator.comparing(Employee::getDepartment))
-                .collect(Collectors.toList());
-    }
-
-    public List<Employee> employeePrintDepartment(int department) {
-        return employeeService.employeeData.values().stream()
-                .filter(employeeData -> employeeData.getDepartment() == department)
-                .collect(Collectors.toList());
+                .min(Comparator.comparingInt(Employee :: getSalary))
+                .orElse(null);
     }
     public int employeeSumSalary(int department) {
-        return employeeService.employeeData.values().stream()
+        return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
                 .mapToInt( Employee :: getSalary)
                 .sum();
     }
+    public Collection<Employee> employeePrintAll() {
+        return employeeService.getEmployeeData().values().stream()
+                .sorted(Comparator.comparing(Employee::getDepartment))
+                .collect(Collectors.toList());
+    }
+
+    public Collection<Employee> employeePrintDepartment(int department) {
+        return employeeService.getEmployeeData().values().stream()
+                .filter(employeeData -> employeeData.getDepartment() == department)
+                .collect(Collectors.toList());
+    }
+
 //    public Map<Integer, List<Employee>> allEmployeeDepartment() {
 //         return employeeService.employeeMap().values().stream()
 //                 .collect(Collectors.groupingBy(Employee :: getDepartment));

@@ -28,18 +28,22 @@ public class DepartmentController {
         return "Сотрудник департамента - " + department + " с минимальной зарплатой - " + String.valueOf(departmentService.employeeMinSalary(department));
     }
 
-//    @GetMapping(path = "/all")
-//    public String employeePrint(@RequestParam(required = false, value = "departmentID") Integer department) {
-//        if (department == null) {
-//            return departmentService.employeePrintAll().toString();
-//        } else {
-//            return departmentService.employeePrintDepartment(department).toString();
-//        }
-//    }
+    @GetMapping(path = "/all")
+    public String employeePrint(@RequestParam(required = false, value = "departmentID") Integer department) {
+        if (department == null) {
+            return departmentService.employeePrintAll().toString();
+        } else {
+            return departmentService.employeePrintDepartment(department).toString();
+        }
+    }
     @GetMapping("{id}//sum")
     public String employeeSumSalary(@PathVariable (value = "departmentID") Integer department)
     {
         return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
     }
+//        @GetMapping( path = "/employee/1")
+//    public Map<Integer, List<Employee>> allEmployeeDepartment() {
+//        return departmentService.allEmployeeDepartment();
+//   }
 }
 
