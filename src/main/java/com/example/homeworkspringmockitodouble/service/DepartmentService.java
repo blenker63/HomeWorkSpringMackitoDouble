@@ -38,20 +38,20 @@ public class DepartmentService {
     }
     public Collection<Employee> employeePrintAll() {
         return employeeService.getEmployeeData().values().stream()
-                .sorted(Comparator.comparing(Employee::getDepartment))
+                .sorted(Comparator.comparingInt(Employee :: getDepartment))
                 .collect(Collectors.toList());
     }
 
-    public Collection<Employee> employeePrintDepartment(int department) {
+    public Collection<Employee> employeePrintDepartment(Integer department) {
         return employeeService.getEmployeeData().values().stream()
                 .filter(employeeData -> employeeData.getDepartment() == department)
                 .collect(Collectors.toList());
     }
 
-//    public Map<Integer, List<Employee>> allEmployeeDepartment() {
-//         return employeeService.employeeMap().values().stream()
-//                 .collect(Collectors.groupingBy(Employee :: getDepartment));
-////                 .collect(Collectors.groupingBy(Employee :: getDepartment,
-////                         Collectors.mapping(Employee :: getSurname, Collectors.toSet())));
-//        }
+    public Map<Integer, List<Employee>> allEmployeeDepartment() {
+         return employeeService.getEmployeeData().values().stream()
+                 .collect(Collectors.groupingBy(Employee :: getDepartment));
+//                 .collect(Collectors.groupingBy(Employee :: getDepartment,
+//                         Collectors.mapping(Employee :: getSurname, Collectors.toSet())));
+        }
 }

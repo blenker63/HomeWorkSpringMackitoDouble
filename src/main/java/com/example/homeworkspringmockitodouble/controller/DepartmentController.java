@@ -1,10 +1,12 @@
 package com.example.homeworkspringmockitodouble.controller;
 
 import com.example.homeworkspringmockitodouble.service.DepartmentService;
+import com.example.homeworkspringmockitodouble.service.Employee;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping(path = "/departments")
@@ -41,9 +43,9 @@ public class DepartmentController {
     {
         return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
     }
-//        @GetMapping( path = "/employee/1")
-//    public Map<Integer, List<Employee>> allEmployeeDepartment() {
-//        return departmentService.allEmployeeDepartment();
-//   }
+        @GetMapping( path = "/employee/1")
+        public  Map<Integer, List<Employee>> allEmployeeDepartment() {
+        return departmentService.allEmployeeDepartment();
+   }
 }
 

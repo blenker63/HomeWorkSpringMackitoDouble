@@ -1,5 +1,7 @@
 package com.example.homeworkspringmockitodouble.service;
 
+import java.util.Objects;
+
 public class Employee {
     private String surname;
     private String name;
@@ -51,5 +53,18 @@ public class Employee {
                 ", отдел - " + getDepartment() +
                 ", зарплата, рублей - " + getSalary() +
                 ";";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return department == employee.department && salary == employee.salary && counter == employee.counter && surname.equals(employee.surname) && name.equals(employee.name) && patronymic.equals(employee.patronymic) && fullName.equals(employee.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name, patronymic, fullName, department, salary, counter);
     }
 }

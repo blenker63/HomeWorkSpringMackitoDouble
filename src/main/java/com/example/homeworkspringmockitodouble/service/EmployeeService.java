@@ -10,20 +10,20 @@ public class EmployeeService {
     private static int counter = 0;
     private int number = 10;
      public final Map<String, Employee> employeeData = new HashMap<>();
-//    Map<String, Employee> employeeData = new HashMap<>(Map.of(
-//            "ИвановИванИванович",
-//            new Employee("Иванов", "Иван", "Иванович", 1, 11_000),
-//            "ПетровПетрПетрович",
-//            new Employee("Петров", "Петр", "Петрович", 2, 15000),
-//            "СидоровСидорСидорович",
-//            new Employee("Сидоров", "Сидор", "Сидорович", 3, 13000),
-//            "ВасильевВасилийИванович",
-//            new Employee("Васильев", "Василий", "Иванович", 4, 16000),
-//            "СоловьевСтепанВасильевич",
-//            new Employee("Соловьев", "Степан", "Васильевич", 2, 22000),
-//            "СтепановГригорийМихайлович",
-//            new Employee("Степанов", "Григорий", "Михайлович", 5, 17000)
-//    ));
+    Map<String, Employee> employeeDataPreliminary = new HashMap<>(Map.of(
+            "ИвановИванИванович",
+            new Employee("Иванов", "Иван", "Иванович", 1, 11_000),
+            "ПетровПетрПетрович",
+            new Employee("Петров", "Петр", "Петрович", 2, 15000),
+            "СидоровСидорСидорович",
+            new Employee("Сидоров", "Сидор", "Сидорович", 3, 13000),
+            "ВасильевВасилийИванович",
+            new Employee("Васильев", "Василий", "Иванович", 4, 16000),
+            "СоловьевСтепанВасильевич",
+            new Employee("Соловьев", "Степан", "Васильевич", 2, 22000),
+            "СтепановГригорийМихайлович",
+            new Employee("Степанов", "Григорий", "Михайлович", 5, 17000)
+    ));
 
 
     public Employee addEmployee(String surname, String name, String patronymic, int department, int salary) {
@@ -47,7 +47,7 @@ public class EmployeeService {
 
     public Employee removeEmployee(String surname, String name, String patronymic) {
         var kay = surname + name + patronymic;
-        var resultRemove = employeeData.remove(kay);
+        var resultRemove = employeeDataPreliminary.remove(kay);
         if (resultRemove == null) {
             throw new EmployeeNotFoundException(kay + " - Сотрудник не найден");
         }
@@ -57,7 +57,7 @@ public class EmployeeService {
 
     public Employee getEmployee(String surname, String name, String patronymic) {
         var kay = surname + name + patronymic;
-        var resultGet = employeeData.get(kay);
+        var resultGet = employeeDataPreliminary.get(kay);
         if (resultGet == null) {
             throw new EmployeeNotFoundException(kay + " - Сотрудник не найден");
         }

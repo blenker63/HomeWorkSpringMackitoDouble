@@ -46,7 +46,6 @@ public class EmployeeTest {
         });
         Assertions.assertDoesNotThrow(() -> {
             employeeService.removeEmployee("Петров", "Петр", "Петрович");
-//            employeeService.removeEmployee("Петров1", "Петр", "Петрович");
         });
     }
     @Test
