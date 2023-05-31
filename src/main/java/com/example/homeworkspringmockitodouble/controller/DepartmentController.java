@@ -18,9 +18,9 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping(path = "/max-salary")
-
-    public String employeeMaxSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    @GetMapping(path = "{ID}/max-salary")
+//    public String employeeMaxSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    public String employeeMaxSalary(@PathVariable Integer department) {
         if (department == null)
             throw new RuntimeException("Данные введены не полностью");
         else
@@ -28,7 +28,8 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/min-salary")
-    public String employeeMinSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+//    public String employeeMinSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    public String employeeMinSalary(@PathVariable Integer department) {
         return "Сотрудник департамента - " + department + " с минимальной зарплатой - " + String.valueOf(departmentService.employeeMinSalary(department));
     }
 
