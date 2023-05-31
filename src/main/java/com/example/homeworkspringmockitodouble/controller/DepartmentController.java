@@ -1,14 +1,14 @@
 package com.example.homeworkspringmockitodouble.controller;
 
 import com.example.homeworkspringmockitodouble.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.homeworkspringmockitodouble.service.Employee;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping(path = "/departments")
 public class DepartmentController {
@@ -17,9 +17,10 @@ public class DepartmentController {
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-    @GetMapping(path = "/max-salary")
 
-    public String employeeMaxSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    @GetMapping(path = "{ID}/max-salary")
+//    public String employeeMaxSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    public String employeeMaxSalary(@PathVariable Integer department) {
         if (department == null)
             throw new RuntimeException("Данные введены не полностью");
         else
@@ -27,7 +28,8 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/min-salary")
-    public String employeeMinSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+//    public String employeeMinSalary(@RequestParam(required = false, value = "departmentID") Integer department) {
+    public String employeeMinSalary(@PathVariable Integer department) {
         return "Сотрудник департамента - " + department + " с минимальной зарплатой - " + String.valueOf(departmentService.employeeMinSalary(department));
     }
 
@@ -38,6 +40,16 @@ public class DepartmentController {
         } else {
             return departmentService.employeePrintDepartment(department).toString();
         }
+    }
+
+    @GetMapping("{id}//sum")
+    public String employeeSumSalary(@PathVariable(value = "departmentID") Integer department) {
+        return "Сумма зарплат департамента - " + department + ": " + String.valueOf(departmentService.employeeSumSalary(department)) + "рублей";
+    }
+
+    @GetMapping(path = "/employee/1")
+    public Map<Integer, List<Employee>> allEmployeeDepartment() {
+        return departmentService.allEmployeeDepartment();
     }
 }
 
